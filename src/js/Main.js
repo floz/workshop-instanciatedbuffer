@@ -34,13 +34,13 @@ class Main {
 		// -------------------------------------------------------------------------------------------------- YOUR SCENE
 
 		// BufferGeometry
-		const geo = new QuadGeom( 1000 )
-		const mat = new QuadMat( { isFacingCamera: false } )
-		const mesh = new THREE.Mesh( geo, mat )
+		// const geo = new QuadGeom( 10000 )
+		// const mat = new QuadMat( { isFacingCamera: false } )
+		// const mesh = new THREE.Mesh( geo, mat )
 		// this.scene.add( mesh )
 
 		// InstanciatedBufferGeometry
-		this.cubes = new Cubes( 1000 )
+		this.cubes = new Cubes( 10000 )
 		this.scene.add( this.cubes )
 
 		//

@@ -9,7 +9,7 @@ export default class Cubes extends THREE.Group {
 		this.count = count
 
 		this.geometry = new THREE.InstancedBufferGeometry()
-		this.geometry.copy( new THREE.BoxBufferGeometry( 1, 1, 1 ) )
+		this.geometry.copy( new THREE.SphereBufferGeometry( 1, 10, 10 ) )
 
 		this.positions = new Float32Array( this.count * 3 )
 		this.scales = new Float32Array( this.count )
