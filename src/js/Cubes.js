@@ -15,7 +15,7 @@ export default class Cubes extends THREE.Group {
 		this.scales = new Float32Array( this.count )
 		this.colors = new Float32Array( this.count * 3 )
 		this.uids = new Float32Array( this.count )
-
+		this.volumeRatio = new Float32Array( this.count * 3 )
 
 		let idx3 = 0
 		for( let i = 0; i < this.count; i ++ ) {
@@ -31,22 +31,25 @@ export default class Cubes extends THREE.Group {
 			this.colors[ idx3 + 1 ] = color.g
 			this.colors[ idx3 + 2 ] = color.b
 
+			this.volumeRatio[ idx3 + 0 ] = Math.random() * 50
+			this.volumeRatio[ idx3 + 1 ] = Math.random() * 100
+			this.volumeRatio[ idx3 + 2 ] = Math.random() * 30
+
+			this.uids[ i ] = Math.random() * 10000 >> 0
+
 			idx3 += 3
 		}
-
-		for( let i = 0; i < this.count; i++ ) {
-			this.uids[ i ] = Math.random() * 10000 >> 0
-		}
-
-		console.log( this.positions, this.scales  )
 
 		// this.geometry.addAttribute( "position", new THREE.InstancedBufferAttribute( this.positions, 3, 1 ) )
 		this.geometry.addAttribute( "aPositions", new THREE.InstancedBufferAttribute( this.positions, 3, 1 ) )
 		this.geometry.addAttribute( "aScales", new THREE.InstancedBufferAttribute( this.scales, 1, 1 ) )
 		this.geometry.addAttribute( "aColors", new THREE.InstancedBufferAttribute( this.colors, 3, 1 ) )
 		this.geometry.addAttribute( "aUids", new THREE.InstancedBufferAttribute( this.uids, 1, 1 ) )
+		this.geometry.addAttribute( "aVolumeRatio", new THREE.InstancedBufferAttribute( this.volumeRatio, 3, 1 ) )
 
-		const uniforms = {}
+		const uniforms = {
+			volume: { type: "f", value: 0 }
+		}
 		this.material = new THREE.RawShaderMaterial( {
 			uniforms: uniforms,
 			vertexShader: vs,
@@ -58,6 +61,10 @@ export default class Cubes extends THREE.Group {
 
 		this.mesh = new THREE.Mesh( this.geometry, this.material )
 		this.add( this.mesh )
+	}
+
+	update( volume ) {
+		this.material.uniforms.volume.value = volume
 	}
 
 }

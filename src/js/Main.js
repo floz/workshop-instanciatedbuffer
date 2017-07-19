@@ -27,7 +27,7 @@ class Main {
 		
 		// -------------------------------------------------------------------------------------------------- CAMERA
 
-		this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 10000 )
+		this.camera = new THREE.PerspectiveCamera( 35, window.innerWidth / window.innerHeight, 1, 100000 )
 		this.camera.position.z = 3000
 		this.controls = new OrbitControls(this.camera)
 		
@@ -37,10 +37,11 @@ class Main {
 		const geo = new QuadGeom( 1000 )
 		const mat = new QuadMat( { isFacingCamera: false } )
 		const mesh = new THREE.Mesh( geo, mat )
-		this.scene.add( mesh )
+		// this.scene.add( mesh )
 
 		// InstanciatedBufferGeometry
-		this.scene.add( new Cubes( 1000 ) )
+		this.cubes = new Cubes( 1000 )
+		this.scene.add( this.cubes )
 
 		//
 
@@ -64,6 +65,8 @@ class Main {
 
 	animate = () => {
 		requestAnimationFrame( this.animate )
+
+		this.cubes.update( audio.volume )
 
 		this.render()
 	}
