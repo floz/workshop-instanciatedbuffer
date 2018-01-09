@@ -1,4 +1,4 @@
-import signals from "signals"
+import Signal from "./Signal"
 
 const H_CANVAS = 200
 const MARGIN = 5
@@ -32,7 +32,7 @@ class Audio {
 			this.values[ i ] = 0
 		}
 
-		this.onBeat = new signals()
+		this.onBeat = new Signal()
 		this.waveData = []
 		this.levelsData = []
 		this.volumeHistory = []
