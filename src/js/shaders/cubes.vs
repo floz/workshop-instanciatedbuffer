@@ -5,6 +5,7 @@ uniform mat4 modelViewMatrix;
 
 uniform float volume;
 
+attribute vec3 normal;
 attribute vec3 position;
 attribute float aScales;
 attribute vec3 aPositions;
@@ -16,6 +17,6 @@ varying vec3 vColor;
 void main() {
 	vColor = aColors;
 	
-	vec3 pos = position * ( aScales + volume * aVolumeRatio ) + aPositions; 
+	vec3 pos = position * aScales * ( ( position.x + position.y + position.z ) / 3. * 3. ) + aPositions + ( aScales + volume * aVolumeRatio ) + aPositions; 
 	gl_Position = projectionMatrix * modelViewMatrix * vec4( pos, 1.0 );
 }

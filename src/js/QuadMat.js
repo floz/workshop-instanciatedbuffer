@@ -9,7 +9,6 @@ class PlanesMaterial extends THREE.RawShaderMaterial {
       color: { type: "c", value: color },
       resolution: { type: "v2", value: new THREE.Vector2( 1, window.innerHeight / window.innerWidth ) }
     }
-    // console.log( window.innerHeight / window.innerWidth )
 
     let optsVs = "precision highp float;\n"
     let optsFs = "precision highp float;\n"

@@ -3,9 +3,7 @@ const OrbitControls = require('three-orbit-controls')(THREE)
 import vsBasic from "shaders/basic.vs"
 import fsBasic from "shaders/basic.fs"
 import audio from "mnf/audio"
-import ColorPass from "postprocess/ColorPass"
 import gui from 'mnf/gui'
-
 
 import QuadGeom from "./QuadGeom"
 import QuadMat from "./QuadMat"
@@ -40,7 +38,7 @@ class Main {
 		// this.scene.add( mesh )
 
 		// InstanciatedBufferGeometry
-		this.cubes = new Cubes( 10000 )
+		this.cubes = new Cubes( 1000 )
 		this.scene.add( this.cubes )
 
 		//
@@ -66,7 +64,9 @@ class Main {
 	animate = () => {
 		requestAnimationFrame( this.animate )
 
-		this.cubes.update( audio.volume )
+		if( this.cubes ) {
+			this.cubes.update( audio.volume )
+		}
 
 		this.render()
 	}
@@ -77,13 +77,11 @@ class Main {
 		this.renderer.render(this.scene, this.camera)
 	}
 
-
 	// -------------------------------------------------------------------------------------------------- RESIZE
 	onResize = () => {
 		this.camera.aspect = window.innerWidth / window.innerHeight
 		this.camera.updateProjectionMatrix()
 		this.renderer.setSize( window.innerWidth, window.innerHeight )
-		this.composer.setSize( this.renderer.domElement.width, this.renderer.domElement.height )
 	}
 
 }

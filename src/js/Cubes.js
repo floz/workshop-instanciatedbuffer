@@ -40,7 +40,11 @@ export default class Cubes extends THREE.Group {
 			idx3 += 3
 		}
 
+		// WARNING!! 
+		// With a InstancedBufferGeometry, you need to keep the "position" attribute free, it's already used internally
 		// this.geometry.addAttribute( "position", new THREE.InstancedBufferAttribute( this.positions, 3, 1 ) )
+
+		// So use something like "aPositions"
 		this.geometry.addAttribute( "aPositions", new THREE.InstancedBufferAttribute( this.positions, 3, 1 ) )
 		this.geometry.addAttribute( "aScales", new THREE.InstancedBufferAttribute( this.scales, 1, 1 ) )
 		this.geometry.addAttribute( "aColors", new THREE.InstancedBufferAttribute( this.colors, 3, 1 ) )
